@@ -1,8 +1,11 @@
 # What-Do-You-Meme
 
 Chris Inglese (N02878802)
+
 Professor Moshe Plotkin
+
 Web Server Programming
+
 February 2nd, 2018
 
 Hi Plotkin, you may remember me from your undergraduate class ‘Web Programming’. I have been a New Paltz student for nearly 5 years now. Having graduated from SUNY New Paltz with my bachelor’s degree last may, I’ve continued my education and I am expected to graduate with a master’s degree this coming may of 2018. 
