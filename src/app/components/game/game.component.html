@@ -1,0 +1,57 @@
+<div class="row" *ngIf="!Me">
+  <input #Name /><button (click)="login(Name.value)" >Login</button>
+</div>
+<div class="row" *ngIf="Me">
+  <div class="col-md-4">
+      
+      <div class="card" >
+          <div class="card-header">My Quotes ({{Me.Name}}) </div>
+          <ul class="list-group list-group-flush my-quotes">
+              <li *ngFor="let quote of Me.MyQuotes" 
+                  (click)="submitQuote($event, quote)"
+                  [ngClass]="{ enabled: !MyPlayedQuote() }"
+                  class="list-group-item" >
+                  {{quote}}
+              </li>
+          </ul>
+        </div>
+  </div>
+  <div class="col-md-8">
+      <div class="card bg-success mb-3" >
+          <div class="card-header text-white">Played Quotes</div>
+              <ul class="list-group list-group-flush ">
+                  <li *ngFor="let quote of Model.PlayedQuotes"
+                      [ngClass]="{ 'list-group-item-success': quote.Chosen }"
+                      class="list-group-item d-flex justify-content-between align-items-center ">
+                      {{quote.Text}}
+                      <span *ngIf="!IsEveryoneDone() || (!IAmTheDealer() && !ChosenQuote())" class="badge badge-light">hidden</span>
+                      <span *ngIf="ChosenQuote()" class="badge badge-primary">{{quote.PlayerId}}</span>
+                      <button *ngIf="IsEveryoneDone() && IAmTheDealer() && !ChosenQuote()"
+                              (click)="quote.Chosen = true"
+                              class="btn btn-sm btn-primary">
+                              Choose
+                      </button>
+                  </li>
+              </ul>
+          </div>
+          
+          <div class="card">
+              <img class="card-img" *ngIf="Model.Picture" [src]="Model.Picture.url" />
+              <div class="card-img-overlay" style="text-align: center">
+                  <button class="btn btn-success btn-lg" (click)="flipPicture($event)">Flip the Picture</button>
+              </div>
+          </div>
+  </div>
+  <div class="col-md-4">
+      
+      <div class="card" >
+          <div class="card-header">Other Players</div>
+          <ul class="list-group list-group-flush">
+              <li *ngFor="let player of Model.Players" class="list-group-item">
+                  <img style="height: 16px; width: 16px" class="rounded">
+                  {{player.Name}}
+              </li>
+          </ul>
+      </div>
+  </div>
+</div>
