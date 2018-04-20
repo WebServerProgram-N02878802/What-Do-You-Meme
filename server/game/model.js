@@ -116,30 +116,40 @@ axios.get('https://api.imgflip.com/get_memes')
 var iCurrentPicture = 0;
 
 
+
+
+
 function Game() {
         this.Players = [];
         this.DealerId = null;
-
         this.PlayedQuotes = [];
         this.Picture = null;
 
         this.GetQuotes = (playerId) => {
             if(this.Players.some(x=> x.PlayerId == playerId)){
-                
+                //player exists
             }else{
+                //player new
                 this.Players.push({ PlayerId: playerId, Name: playerId });
+                if(!isDealerAssigned) {
+                    //player first
+                    this.DealerId = this.Players.indexOf(x=> x.playerId == playerId);
+                }
             }
-                return QuotesStack.slice(iCurrentQuote, iCurrentQuote += 7);   
+            return QuotesStack.slice(iCurrentQuote, iCurrentQuote += 7);   
         }
         
         this.FlipPicture = () => this.Picture = PicturesStack[iCurrentPicture = (iCurrentPicture+1) % PicturesStack.length ];
 
         this.SubmitQuote = (text, playerId) => this.PlayedQuotes.push({ Text: text, PlayerId: playerId });
-        this.ChooseQuote = text => {
+        this.SelectQuote = (text) => {
             this.PlayedQuotes.find(x=> x.Text == text).Chosen = true;
             this.DealerId = this.Players[this.DealerId = (this.DealerId + 1) % this.Players.length ] 
-        } 
-
+        }
+        
+        this.isDealerAssigned = () => {if(this.DealerId == null){ return false;} else{return true;}}
 }
 
+//export function uses shallow scan; doesnt include inner-functions of game (module.exports vs exports?)
+//assumption based on 'state' function of middleware -> returns game obj w/o functions (investigate)
 module.exports = Game;

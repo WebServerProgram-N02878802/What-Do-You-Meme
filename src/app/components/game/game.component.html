@@ -27,7 +27,7 @@
                       <span *ngIf="!IsEveryoneDone() || (!IAmTheDealer() && !ChosenQuote())" class="badge badge-light">hidden</span>
                       <span *ngIf="ChosenQuote()" class="badge badge-primary">{{quote.PlayerId}}</span>
                       <button *ngIf="IsEveryoneDone() && IAmTheDealer() && !ChosenQuote()"
-                              (click)="quote.Chosen = true"
+                              (click)="quote.Chosen = true; selectQuote($event, quote)"
                               class="btn btn-sm btn-primary">
                               Choose
                       </button>
