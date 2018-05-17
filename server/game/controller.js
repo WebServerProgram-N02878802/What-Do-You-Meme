@@ -9,6 +9,7 @@ var game = new Game();
 module.exports = app
     .get('/quotes', (req, res) => res.send(game.GetQuotes(req.query.playerId)))
     .get('/state', (req, res) => res.send(game))
+    .post('/select', (req, res) => res.send(game.SelectQuote(req.body.Text)))
     .post('/picture', (req, res) => res.send( game.FlipPicture() ))
     .post('/quotes', (req, res) => {
         console.log(req.body); 
